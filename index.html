@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CookBook Home</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+function toggleMenu(){
+let menu = document.getElementById("menu");
+
+if(menu.style.display === "block"){
+menu.style.display="none";
+}else{
+menu.style.display="block";
+}
+}
+</script>
+
+</head>
+
+<body class="home-bg">
+
+<!-- Navigation bar -->
+
+<div class="navbar">
+
+<div class="logo">🍳 My CookBook</div>
+
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+
+</div>
+
+<!-- Hidden Menu -->
+
+<div id="menu" class="menu">
+
+
+
+</div>
+
+<!-- Home content -->
+
+<div class="home-content">
+
+<h1>Welcome To Our CookBook</h1>
+
+<p>
+Discover delicious recipes and learn amazing cooking ideas from our website.
+</p>
+
+<a href="register.html" class="home-btn">Start Cooking</a>
+
+</div>
+
+</body>
+</html>

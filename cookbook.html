@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook</title>
+
+<style>
+
+/* RESET & BODY */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+body{
+  font-family: Inter, system-ui, Arial;
+  background:#F5F6FA;
+  color:#1f2937;
+  line-height:1.6;
+  scroll-behavior: smooth;
+}
+
+/* HEADER & NAVBAR */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 25px;
+  background:#FF6B3D;
+  color:white;
+  position:relative;
+  z-index: 1000;
+}
+header .logo{
+  font-size:22px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+header .logo img{
+  height:40px;
+  width:auto;
+  object-fit:contain;
+  cursor:pointer;
+}
+header input{
+  width:40%;
+  padding:8px 12px;
+  border-radius:10px;
+  border:none;
+}
+header button{
+  padding:8px 15px;
+  background:white;
+  color:#FF6B3D;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+header button:hover{
+  background:#ffe5dc;
+}
+
+/* Hamburger menu */
+.hamburger{
+  font-size:28px;
+  cursor:pointer;
+  display:none;
+}
+nav{
+  position:absolute;
+  top:60px;
+  right:0;
+  background:#FF6B3D;
+  display:flex;
+  gap:10px;
+  padding:10px 15px;
+  border-radius:0 0 10px 10px;
+  flex-direction:column;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+nav a:hover{
+  text-decoration:underline;
+}
+
+/* HERO */
+.hero{
+  height:400px;
+  background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  text-align:center;
+  border-radius:10px;
+  margin:20px;
+}
+.hero-text{
+  background:rgba(0,0,0,0.5);
+  padding:25px;
+  border-radius:10px;
+}
+.hero h1{
+  font-size:40px;
+  margin-bottom:10px;
+}
+.hero p{
+  font-size:18px;
+  margin-bottom:20px;
+}
+.hero button{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  background:#FF6B3D;
+  color:white;
+}
+.hero button:hover{
+  background:#f04e1e;
+}
+
+/* CATEGORIES */
+.categories{
+  text-align:center;
+  margin:25px;
+}
+.categories button{
+  margin:5px;
+  padding:8px 15px;
+  border:none;
+  border-radius:8px;
+  background:#FF6B3D;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+.categories button:hover{
+  background:#f04e1e;
+}
+
+/* GRID CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  padding:0 25px;
+}
+.card{
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  text-align:center;
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.card h3{
+  padding:10px 0;
+}
+.card p{
+  padding-bottom:10px;
+}
+.rating{
+  color:gold;
+}
+
+/* ABOUT US */
+.about{
+  background:url("https://images.unsplash.com/photo-1525755662778-989d0524087e");
+  background-size:cover;
+  background-position:center;
+  padding:50px 25px;
+  color: #333;
+  border-radius:17px;
+  margin:20px;
+}
+.about h2{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:20px;
+}
+.about p{
+  max-width:900px;
+  margin:auto;
+  font-size:20px;
+  line-height:1.5;
+  text-align:center;
+}
+
+/* TEAM */
+.team{
+  background:#f5f5f5;
+  padding:50px 25px;
+  border-radius:10px;
+  margin:20px;
+}
+.team h2{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:30px;
+}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  justify-items:center;
+}
+.member{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+.member img{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-bottom:10px;
+}
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background:#333;
+  color:white;
+  margin-top:25px;
+  border-radius:10px 10px 0 0;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  header input{
+    width:100%;
+  }
+  .hamburger{
+    display:block;
+  }
+  nav{
+    display:none;
+  }
+  .grid{
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  }
+  .team-grid{
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  }
+}
+/* POPUP MODAL */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("https://images.unsplash.com/photo-1551218808-94e220e084d2");
+background-size:cover;
+background-position:center;
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.modal-box{
+background:rgba(255,255,255,0.95);
+padding:30px;
+border-radius:12px;
+width:320px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-box input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.modal-btn{
+background:#FF6B3D;
+color:white;
+padding:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:30px;
+font-size:30px;
+cursor:pointer;
+color:#000
+;
+}
+.fav-btn{
+  background:none;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+  margin:5px;
+}
+
+.fav-btn:hover{
+  transform:scale(1.2);
+}
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    
+    <span>CookBook</span>
+  </div>
+
+  <input type="text" id="search" placeholder="Search recipes...">
+  <button onclick="location.href='register.html'">Register</button>
+  <button onclick="location.href='log in.html'">Login</button>
+
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <nav id="nav-menu">
+    <a href="#">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#team">Team</a>
+    <a href="register.html">Register</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Discover Delicious Recipes</h1>
+    <p>Cook amazing meals with our easy and tasty recipes.</p>
+    <button onclick="document.querySelector('.grid').scrollIntoView({behavior:'smooth'})">Explore Recipes</button>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<div class="categories">
+  <button onclick="showMenu('breakfast')">Breakfast</button>
+  <button onclick="showMenu('lunch')">Lunch</button>
+  <button onclick="showMenu('dinner')">Dinner</button>
+  <button onclick="showMenu('dessert')">Dessert</button>
+  <button onclick="showMenu('vegan')">Vegan</button>
+</div>
+<!-- FOOD MENUS -->
+
+<section id="breakfast" class="foodmenu" style="display:none;">
+<h2>Breakfast Menu</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+</button>
+</div>
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Pancakes</h3>
+<p>Fluffy pancakes with honey</p>
+
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1506086679525-9c7e2a6c88ad">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Omelette</h3>
+<p>Egg omelette with vegetables</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505253213348-cd54c37c3c1b">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>French Toast</h3>
+<p>Sweet bread with syrup</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="lunch" class="foodmenu" style="display:none;">
+<h2>Lunch Menu</h2>
+<div class="grid">
+
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Burger</h3>
+<p>Beef burger with fries</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Chicken Rice</h3>
+<p>Grilled chicken with rice</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="dinner" class="foodmenu" style="display:none;">
+<h2>Dinner Menu</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Pasta</h3>
+<p>Creamy pasta dinner</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1543353071-873f17a7a088">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Vegetable Soup</h3>
+<p>Healthy evening soup</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Grilled Fish</h3>
+<p>Fresh grilled fish</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="dessert" class="foodmenu" style="display:none;">
+<h2>Dessert Menu</h2>
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1551024506-0bccd828d307">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Chocolate Cake</h3>
+<p>Rich chocolate cake</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Ice Cream</h3>
+<p>Vanilla ice cream scoop</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Donuts</h3>
+<p>Sweet sugar donuts</p>
+</div>
+
+</div>
+</section>
+
+
+<section id="vegan" class="foodmenu" style="display:none;">
+<h2>Vegan Menu</h2>
+<div class="grid">
+
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Avocado Bowl</h3>
+<p>Fresh avocado vegan bowl</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd">
+<button onclick="showRecipe('Pancakes recipe: flour, eggs, milk, sugar. Mix ingredients and cook on pan.')">
+View Recipe
+  <button class="fav-btn" onclick="addFavorite(this)">❤️</button>
+<h3>Vegan Veggie Plate</h3>
+<p>Mixed vegetable meal</p>
+</div>
+
+</div>
+</section>
+<!-- FEATURED RECIPES -->
+<section>
+  
+  <h3 style="text-align:center;">Featured Recipes</h3>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd">
+      <h3>Burger</h3>
+      <p>Delicious beef burger</p>
+      <p class="rating">⭐⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856">
+      <h3>Pasta</h3>
+      <p>Creamy pasta recipe</p>
+      <p class="rating">⭐⭐⭐⭐⭐</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93">
+      <h3>Pancakes</h3>
+      <p>Sweet breakfast pancakes</p>
+      <p class="rating">⭐⭐⭐⭐</p>
+    </div>
+    
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088">
+      <h3>Vegetable Soup</h3>
+      <p>Warm and tasty soup</p>
+      <p class="rating">⭐⭐⭐⭐</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section class="about" id="about">
+  <h2>About Us</h2>
+  <p>CookBook was created to make cooking easy and enjoyable for everyone. 
+     Our goal is to share amazing recipes, help people discover new flavors, 
+     and inspire creativity in the kitchen. The idea started from a passion 
+     for cooking and sharing food stories online. Enjoy browsing, cooking, 
+     and tasting delicious meals!</p>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <h2>Meet Our Team</h2>
+  <div class="team-grid">
+    <div class="member">
+    
+      <h3>AKALIZA HOBINE</h3>
+      <p>Lead developer and recipe designer. Passionate about cooking and building amazing web experiences.</p>
+    </div>
+    <div class="member">
+      
+      <h3>TETA DAVINA</h3>
+      <p>UI/UX designer who ensures our website is beautiful, intuitive, and user-friendly.</p>
+    </div>
+    <div class="member">
+      
+      <h3>STEVO DE MAN</h3>
+      <p>Backend developer who manages data, recipes, and ensures everything runs smoothly.</p>
+    </div>
+  </div>
+</section>
+<!--CONTACT US-->
+<section class="team" id="contact"></section>
+  <h2>contact us</h2>
+  <div class="team-grid">
+
+    <div class="member">
+      <h1>instagram</h1>
+    </div>
+
+    <div class="member">
+      <h2>face book</h2>
+    </div>
+
+    <div class="member">
+      <h3>twitter</h3>
+    </div>
+    <div class="member">
+      <h3>tik tok</h3></div>
+    </div>
+
+<!-- LOGIN POPUP -->
+
+<div id="loginModal" class="modal">
+
+<div class="modal-box">
+
+<span class="close" onclick="closeLogin()">×</span>
+
+<h2>CookBook Login</h2>
+
+<input type="text" placeholder="Username">
+<input type="password" placeholder="Password">
+
+<button class="modal-btn">Login</button>
+
+</div>
+
+</div>
+<!-- REGISTER POPUP -->
+
+<div id="registerModal" class="modal">
+
+<div class="modal-box">
+
+<span class="close" onclick="closeRegister()">×</span>
+
+<h2>Create Account</h2>
+
+<input type="text" placeholder="Full Name">
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Password">
+
+<button class="modal-btn">Register</button>
+
+</div>
+
+</div>
+<!-- RECIPE POPUP -->
+
+<div id="recipeModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+  <div class="modal-box" style="background:white; padding:20px; border-radius:10px; max-width:500px; width:90%; text-align:center; position:relative;">
+    <span class="close" onclick="closeRecipe()" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">×</span>
+    <h2>Recipe Instructions</h2>
+    <p id="recipeText"></p>
+  </div>
+</div>
+<footer>
+  <p>© 2026 CookBook Website</p>
+</footer>
+
+<script>
+const searchInput = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
+searchInput.addEventListener("keyup", function(){
+  const filter = searchInput.value.toLowerCase();
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(filter) ? "block" : "none";
+  });
+});
+function toggleMenu(){
+  const nav = document.getElementById("nav-menu");
+  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+}
+function showMenu(menu){
+
+let menus = document.querySelectorAll(".foodmenu");
+
+menus.forEach(function(section){
+section.style.display = "none";
+});
+
+document.getElementById(menu).style.display = "block";
+
+}
+function openLogin(){
+document.getElementById("loginModal").style.display="flex";
+}
+
+function closeLogin(){
+document.getElementById("loginModal").style.display="none";
+}
+
+function openRegister(){
+document.getElementById("registerModal").style.display="flex";
+}
+
+function closeRegister(){
+document.getElementById("registerModal").style.display="none";
+}
+function showRecipe(text){
+  document.getElementById("recipeModal").style.display="flex";
+  document.getElementById("recipeText").innerText=text;
+}
+
+function closeRecipe(){
+  document.getElementById("recipeModal").style.display="none";
+}
+
+function addFavorite(btn){
+  if(btn.innerText==="❤️"){
+    btn.innerText="💖";
+  } else {
+    btn.innerText="❤️";
+  }
+}
+// Close the modal if user clicks outside the modal box
+window.onclick = function(event) {
+  let modal = document.getElementById("recipeModal");
+  if(event.target === modal){
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
