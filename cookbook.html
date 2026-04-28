@@ -27,7 +27,7 @@ header{
   align-items:center;
   justify-content:space-between;
   padding:15px 25px;
-  background:#FF6B3D;
+  background: linear-gradient(white,orange);
   color:white;
   position:relative;
   z-index: 1000;
@@ -345,12 +345,101 @@ color:#000
   justify-content: center; /* center horizontally */
   align-items: center;     /* center vertically */
 }
+img{
+  width: 20vh;
+  height: 30vh;
+  border-radius: 20vh;
+border: 1px 2px 3px solid black;
+}
+.recipe-table-section{
+  padding:40px 20px;
+}
+
+.recipe-table{
+  width:90%;
+  margin:auto;
+  border-collapse:collapse;
+  background:white;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.recipe-table th{
+  background:#FF6B3D;
+  color:white;
+  padding:15px;
+  text-align:left;
+}
+
+.recipe-table td{
+  padding:15px;
+  border-bottom:1px solid #eee;
+}
+
+.recipe-table tr:hover{
+  background:#f9f9f9;
+}
+/* POPUP BACKDROP */
+.recipe-popup{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  justify-content:center;
+  align-items:center;
+  z-index:3000;
+}
+
+/* POPUP BOX */
+.recipe-popup-content{
+  background:white;
+  width:90%;
+  max-width:600px;
+  padding:25px;
+  border-radius:12px;
+  position:relative;
+  animation:fadeIn 0.3s ease;
+}
+
+.recipe-popup-content h2{
+  margin-bottom:10px;
+}
+
+.recipe-popup-content ul{
+  margin-left:20px;
+  margin-bottom:10px;
+}
+
+.close-btn{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+@keyframes fadeIn{
+  from{transform:scale(0.8); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+/* CLICKABLE ROW */
+.recipe-table tr{
+  cursor:pointer;
+}
+.recipe-table tr:hover{
+  background:#ffe5dc;
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
+ <img src="./logo.png">
     
     <span>CookBook</span>
   </div>
@@ -361,11 +450,11 @@ color:#000
 
   <div class="hamburger" onclick="toggleMenu()">☰</div>
   <nav id="nav-menu">
-    <a href="#">Home</a>
-    <a href="#about">About Us</a>
-    <a href="#team">Team</a>
-    <a href="register.html">Register</a>
-    <a href="login.html">Login</a>
+    <a href="#/home.html">Home</a>
+    <a href="./about.html">About Us</a>
+    <a href="./team.html">Team</a>
+    <a href="./register.html">Register</a>
+    <a href="./log in.html">Login</a>
   </nav>
 </header>
 
@@ -374,10 +463,50 @@ color:#000
   <div class="hero-text">
     <h1>Discover Delicious Recipes</h1>
     <p>Cook amazing meals with our easy and tasty recipes.</p>
-    <button onclick="document.querySelector('.grid').scrollIntoView({behavior:'smooth'})">Explore Recipes</button>
+  <button onclick="document.getElementById('recipeTable').scrollIntoView({behavior:'smooth'})">
+Explore Recipes
+</button>
   </div>
 </section>
+<section id="recipeTable" class="recipe-table-section">
 
+  <h2 style="text-align:center; margin:30px 0;">All Recipes</h2>
+
+  <table class="recipe-table">
+    <tr>
+      <th>Food</th>
+      <th>Ingredients</th>
+      <th>How to Cook</th>
+    </tr>
+<tr onclick="openRecipe('pancakes')">
+  <td>Pancakes</td>
+  <td>Flour, eggs, milk, sugar, butter</td>
+  <td>Click to view full recipe</td>
+</tr>
+
+<tr onclick="openRecipe('burger')">
+  <td>Burger</td>
+  <td>Bun, beef, lettuce, cheese</td>
+  <td>Click to view full recipe</td>
+</tr>
+
+<tr onclick="openRecipe('pasta')">
+  <td>Pasta</td>
+  <td>Pasta, cream, garlic, cheese</td>
+  <td>Click to view full recipe</td>
+</tr>
+
+<tr onclick="openRecipe('omelette')">
+  <td>Omelette</td>
+  <td>Eggs, salt, pepper, vegetables</td>
+  <td>Click to view full recipe</td>
+</tr>
+    
+    </tr>
+
+  </table>
+
+</section>
 <!-- CATEGORIES -->
 <div class="categories">
   <button onclick="showMenu('breakfast')">Breakfast</button>
@@ -603,12 +732,12 @@ View Recipe
     </div>
     <div class="member">
       
-      <h3>TETA DAVINA</h3>
+      <h3>AKANSHEMEZA Allen</h3>
       <p>UI/UX designer who ensures our website is beautiful, intuitive, and user-friendly.</p>
     </div>
     <div class="member">
       
-      <h3>STEVO DE MAN</h3>
+      <h3>MUGISHA Ivan</h3>
       <p>Backend developer who manages data, recipes, and ensures everything runs smoothly.</p>
     </div>
   </div>
@@ -746,7 +875,61 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-</script>
+function openRecipe(type){
+  const popup = document.getElementById("recipePopup");
+  popup.style.display = "flex";
 
+  const title = document.getElementById("recipeTitle");
+  const ingredients = document.getElementById("recipeIngredients");
+  const steps = document.getElementById("recipeSteps");
+
+  let data = {
+    pancakes:{
+      title:"Pancakes",
+      ingredients:["Flour","Eggs","Milk","Sugar","Butter"],
+      steps:"Mix all ingredients. Heat pan. Cook both sides until golden brown."
+    },
+    burger:{
+      title:"Burger",
+      ingredients:["Bun","Beef","Lettuce","Cheese","Tomato"],
+      steps:"Grill beef patty. Assemble bun with toppings."
+    },
+    pasta:{
+      title:"Pasta",
+      ingredients:["Pasta","Cream","Garlic","Cheese"],
+      steps:"Boil pasta. Cook sauce. Mix together and serve."
+    },
+    omelette:{
+      title:"Omelette",
+      ingredients:["Eggs","Salt","Pepper","Vegetables"],
+      steps:"Beat eggs. Fry in pan. Fold and serve hot."
+    }
+  };
+
+  let recipe = data[type];
+
+  title.innerText = recipe.title;
+  ingredients.innerHTML = recipe.ingredients.map(i => `<li>${i}</li>`).join("");
+  steps.innerText = recipe.steps;
+}
+
+function closePopup(){
+  document.getElementById("recipePopup").style.display = "none";
+}
+
+function closeRecipe(event){
+  document.getElementById("recipePopup").style.display = "none";
+}
+</script>
+<div id="recipePopup" class="recipe-popup" onclick="closeRecipe(event)">
+  <div class="recipe-popup-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closePopup()">×</span>
+    <h2 id="recipeTitle"></h2>
+    <h3>Ingredients</h3>
+    <ul id="recipeIngredients"></ul>
+    <h3>Steps</h3>
+    <p id="recipeSteps"></p>
+  </div>
+</div>
 </body>
 </html>
